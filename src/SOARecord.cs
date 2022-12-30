@@ -127,6 +127,5 @@ namespace Makaretu.Dns
             writer.WriteTimeSpan32(Expire);
             writer.WriteTimeSpan32(Minimum, appendSpace: false);
         }
-
     }
 }

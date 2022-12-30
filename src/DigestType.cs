@@ -3,7 +3,6 @@ using System.Linq;
 
 namespace Makaretu.Dns
 {
-
     /// <summary>
     ///  Identities the cryptographic digest algorithm used by the resource records.
     /// </summary>

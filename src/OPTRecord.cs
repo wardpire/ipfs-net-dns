@@ -30,7 +30,6 @@ namespace Makaretu.Dns
     /// <seealso href="https://tools.ietf.org/html/rfc6891"/>
     public class OPTRecord : ResourceRecord
     {
-
         /// <summary>
         ///   Creates a new instance of the <see cref="OPTRecord"/> class.
         /// </summary>
@@ -175,7 +174,7 @@ namespace Makaretu.Dns
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.AppendLine($"; EDNS: version: {Version}, udp {RequestorPayloadSize}");
+            sb.Append("; EDNS: version: ").Append(Version).Append(", udp ").Append(RequestorPayloadSize).AppendLine();
             //; EDNS: version: 0, flags:; MBZ: 0005 , udp: 4000
 
             foreach (var option in Options)

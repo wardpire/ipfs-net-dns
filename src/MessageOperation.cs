@@ -39,6 +39,5 @@ namespace Makaretu.Dns
         ///   Update message, see <see href="https://tools.ietf.org/html/rfc2136"/>.
         /// </summary>
         Update = 5,
-
     }
 }

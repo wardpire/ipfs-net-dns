@@ -3,7 +3,6 @@ using System.Linq;
 
 namespace Makaretu.Dns
 {
-
     /// <summary>
     ///   EDSN option codes.
     /// </summary>
@@ -15,7 +14,6 @@ namespace Makaretu.Dns
     /// <seealso cref="EdnsOptionRegistry"/>
     public enum EdnsOptionType : ushort
     {
-
         /// <summary>
         ///   DNS Name Server Identifier (NSID) Option.
         /// </summary>
@@ -101,6 +99,6 @@ namespace Makaretu.Dns
         ///   Reserved for future expansion.
         /// </summary>
         /// <seealso href="https://tools.ietf.org/html/rfc6891"/>
-        FutureExpansion = 65535 
+        FutureExpansion = 65535
     }
 }

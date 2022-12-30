@@ -153,6 +153,5 @@ namespace Makaretu.Dns
         {
             return DeleteResource(name, new T().Type);
         }
-
     }
 }

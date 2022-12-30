@@ -40,16 +40,16 @@ namespace Makaretu.Dns
         /// <exception cref="ArgumentOutOfRangeException">
         ///   The <see cref="ResourceRecord.Name"/> of the <paramref name="key"/> is missing.
         /// </exception>
-        public DSRecord(DNSKEYRecord key, bool force = false) 
+        public DSRecord(DNSKEYRecord key, bool force = false)
             : this()
         {
             // Check the key.
             if (!force)
             {
                 if ((key.Flags & DNSKEYFlags.ZoneKey) == DNSKEYFlags.None)
-                    throw new ArgumentException("ZoneKey must be set.", "key");
+                    throw new ArgumentException("ZoneKey must be set.", nameof(key));
                 if ((key.Flags & DNSKEYFlags.SecureEntryPoint) == DNSKEYFlags.None)
-                    throw new ArgumentException("SecureEntryPoint must be set.", "key");
+                    throw new ArgumentException("SecureEntryPoint must be set.", nameof(key));
             }
 
             byte[] digest;
@@ -79,10 +79,10 @@ namespace Makaretu.Dns
         /// <summary>
         ///   The <see cref="SecurityAlgorithm"/> of the referenced <see cref="DNSKEYRecord"/>.
         /// </summary>
-        public SecurityAlgorithm Algorithm {get; set; }
+        public SecurityAlgorithm Algorithm { get; set; }
 
         /// <summary>
-        ///   The cryptographic hash algorithm used to create the 
+        ///   The cryptographic hash algorithm used to create the
         ///   <see cref="Digest"/>.
         /// </summary>
         /// <value>
@@ -131,7 +131,7 @@ namespace Makaretu.Dns
             {
                 sb.Append(reader.ReadString());
             }
-            Digest = Base16.Decode(sb.ToString());
+            Digest = Base16.Decode(sb.ToString()).ToArray();
         }
 
         /// <inheritdoc />

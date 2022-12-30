@@ -13,20 +13,20 @@ namespace Makaretu.Dns
     /// </summary>
     public class PresentationReader
     {
-        static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        private static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
-        System.IO.TextReader text;
-        TimeSpan? defaultTTL = null;
-        DomainName defaultDomainName = null;
-        int parenLevel = 0;
-        int previousChar = '\n';  // Assume a newline
-        bool eolSeen = false;
+        private readonly System.IO.TextReader text;
+        private TimeSpan? defaultTTL = null;
+        private DomainName defaultDomainName = null;
+        private int parenLevel = 0;
+        private int previousChar = '\n';  // Assume a newline
+        private bool eolSeen = false;
 
         /// <summary>
         ///   Indicates that the token is at the begining of the line without
         ///   any leading whitespace.
         /// </summary>
-        bool tokenStartsNewLine = false;
+        private bool tokenStartsNewLine = false;
 
         /// <summary>
         ///   The reader relative position within the stream.
@@ -101,7 +101,7 @@ namespace Makaretu.Dns
             return MakeAbsoluteDomainName(ReadToken(ignoreEscape: true));
         }
 
-        DomainName MakeAbsoluteDomainName(string name)
+        private DomainName MakeAbsoluteDomainName(string name)
         {
             // If an absolute name.
             if (name.EndsWith("."))
@@ -174,10 +174,7 @@ namespace Makaretu.Dns
         /// <returns>
         ///   An <see cref="IPAddress"/>.
         /// </returns>
-        public IPAddress ReadIPAddress(int length = 4)
-        {
-            return IPAddress.Parse(ReadToken());
-        }
+        public IPAddress ReadIPAddress(int length = 4) => IPAddress.Parse(ReadToken());
 
         /// <summary>
         ///   Read a DNS Type.
@@ -191,7 +188,7 @@ namespace Makaretu.Dns
             var token = ReadToken();
             if (token.StartsWith("TYPE"))
             {
-                return (DnsType)ushort.Parse(token.Substring(4), CultureInfo.InvariantCulture);
+                return (DnsType)ushort.Parse(token.AsSpan(4), CultureInfo.InvariantCulture);
             }
             return (DnsType)Enum.Parse(typeof(DnsType), token);
         }
@@ -234,11 +231,12 @@ namespace Makaretu.Dns
         public byte[] ReadResourceData()
         {
             var leadin = ReadToken();
+
             if (leadin != "#")
                 throw new FormatException($"Expected RDATA leadin '\\#', not '{leadin}'.");
             var length = ReadUInt32();
             if (length == 0)
-                return new byte[0];
+                return Array.Empty<byte>();
 
             // Get the hex string.
             var sb = new StringBuilder();
@@ -257,7 +255,7 @@ namespace Makaretu.Dns
             // Convert hex string into byte array.
             try
             {
-                return Base16.Decode(sb.ToString());
+                return Base16.Decode(sb.ToString()).ToArray();
             }
             catch (InvalidOperationException e)
             {
@@ -276,7 +274,7 @@ namespace Makaretu.Dns
         ///   Processes the "$ORIGIN" and "$TTL" specials that define the
         ///   <see cref="Origin"/> and a default time-to-live respectively.
         ///   <para>
-        ///   A domain name can be "@" to refer to the <see cref="Origin"/>. 
+        ///   A domain name can be "@" to refer to the <see cref="Origin"/>.
         ///   A missing domain name will use the previous record's domain name.
         ///   </para>
         ///   <para>
@@ -285,6 +283,7 @@ namespace Makaretu.Dns
         ///   the <see cref="ResourceRecord.DefaultTTL"/>.
         ///   </para>
         /// </remarks>
+        /// <exception cref="InvalidDataException"></exception>
         public ResourceRecord ReadResourceRecord()
         {
             DomainName domainName = defaultDomainName;
@@ -295,7 +294,7 @@ namespace Makaretu.Dns
             while (!type.HasValue)
             {
                 var token = ReadToken(ignoreEscape: true);
-                if (token == "")
+                if (token?.Length == 0)
                 {
                     return null;
                 }
@@ -308,13 +307,16 @@ namespace Makaretu.Dns
                         case "$ORIGIN":
                             Origin = ReadDomainName();
                             break;
+
                         case "$TTL":
                             defaultTTL = ttl = ReadTimeSpan32();
                             break;
+
                         case "@":
                             domainName = Origin;
                             defaultDomainName = domainName;
                             break;
+
                         default:
                             domainName = MakeAbsoluteDomainName(token);
                             defaultDomainName = domainName;
@@ -324,7 +326,7 @@ namespace Makaretu.Dns
                 }
 
                 // Is TTL?
-                if (token.All(c => Char.IsDigit(c)))
+                if (token.All(c => char.IsDigit(c)))
                 {
                     ttl = TimeSpan.FromSeconds(uint.Parse(token));
                     continue;
@@ -333,10 +335,10 @@ namespace Makaretu.Dns
                 // Is TYPE?
                 if (token.StartsWith("TYPE"))
                 {
-                    type = (DnsType)ushort.Parse(token.Substring(4), CultureInfo.InvariantCulture);
+                    type = (DnsType)ushort.Parse(token.AsSpan(4), CultureInfo.InvariantCulture);
                     continue;
                 }
-                if (token.ToLowerInvariant() != "any" && Enum.TryParse<DnsType>(token, out DnsType t))
+                if (!string.Equals(token, "any", StringComparison.InvariantCultureIgnoreCase) && Enum.TryParse<DnsType>(token, out DnsType t))
                 {
                     type = t;
                     continue;
@@ -345,10 +347,10 @@ namespace Makaretu.Dns
                 // Is CLASS?
                 if (token.StartsWith("CLASS"))
                 {
-                    klass = (DnsClass)ushort.Parse(token.Substring(5), CultureInfo.InvariantCulture);
+                    klass = (DnsClass)ushort.Parse(token.AsSpan(5), CultureInfo.InvariantCulture);
                     continue;
                 }
-                if (Enum.TryParse<DnsClass>(token, out DnsClass k))
+                if (Enum.TryParse(token, out DnsClass k))
                 {
                     klass = k;
                     continue;
@@ -357,14 +359,9 @@ namespace Makaretu.Dns
                 throw new InvalidDataException($"Unknown token '{token}', expected a Class, Type or TTL.");
             }
 
-            if (domainName == null)
-            { 
-                throw new InvalidDataException("Missing resource record name.");
-            }
-
             // Create the specific resource record based on the type.
             var resource = ResourceRegistry.Create(type.Value);
-            resource.Name = domainName;
+            resource.Name = domainName ?? throw new InvalidDataException("Missing resource record name.");
             resource.Type = type.Value;
             resource.Class = klass;
             if (ttl.HasValue)
@@ -376,7 +373,6 @@ namespace Makaretu.Dns
             resource.ReadData(this);
 
             return resource;
-
         }
 
         /// <summary>
@@ -404,7 +400,6 @@ namespace Makaretu.Dns
                     }
                     return false;
                 }
-
             }
 
             if (eolSeen)
@@ -427,7 +422,7 @@ namespace Makaretu.Dns
             return true;
         }
 
-        string ReadToken(bool ignoreEscape = false)
+        private string ReadToken(bool ignoreEscape = false)
         {
             var sb = new StringBuilder();
             int c;
@@ -535,7 +530,7 @@ namespace Makaretu.Dns
                 // Skip leading whitespace.
                 if (skipWhitespace)
                 {
-                    if (Char.IsWhiteSpace((char)c))
+                    if (char.IsWhiteSpace((char)c))
                     {
                         previousChar = c;
                         continue;
@@ -544,7 +539,7 @@ namespace Makaretu.Dns
                 }
 
                 // Trailing whitespace, ends the token.
-                if (Char.IsWhiteSpace((char)c))
+                if (char.IsWhiteSpace((char)c))
                 {
                     previousChar = c;
                     eolSeen = c == '\r' || c == '\n';
@@ -570,6 +565,5 @@ namespace Makaretu.Dns
 
             return sb.ToString();
         }
-
     }
 }

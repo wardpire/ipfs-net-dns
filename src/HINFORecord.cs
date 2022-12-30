@@ -7,14 +7,15 @@ using System.Text;
 namespace Makaretu.Dns
 {
     /// <summary>
-    ///   Host information. 
+    ///   Host information.
     /// </summary>
     /// <remarks>
-    ///   Standard values for CPU and OS can be found in [RFC-1010].
-    ///
+    /// <para>  Standard values for CPU and OS can be found in [RFC-1010].</para>
+    /// <para>
     ///   HINFO records are used to acquire general information about a host. The
     ///   main use is for protocols such as FTP that can use special procedures
     ///   when talking between machines or operating systems of the same type.
+    /// </para>
     /// </remarks>
     public class HINFORecord : ResourceRecord
     {
@@ -24,7 +25,7 @@ namespace Makaretu.Dns
         public HINFORecord() : base()
         {
             Type = DnsType.HINFO;
-            TTL = ResourceRecord.DefaultHostTTL;
+            TTL = DefaultHostTTL;
         }
 
         /// <summary>
@@ -36,7 +37,6 @@ namespace Makaretu.Dns
         ///  Operating system type.
         /// </summary>
         public string OS { get; set; }
-
 
         /// <inheritdoc />
         public override void ReadData(WireReader reader, int length)
@@ -65,6 +65,5 @@ namespace Makaretu.Dns
             writer.WriteString(Cpu);
             writer.WriteString(OS, appendSpace: false);
         }
-
     }
 }

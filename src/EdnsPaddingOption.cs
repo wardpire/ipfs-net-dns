@@ -49,6 +49,5 @@ namespace Makaretu.Dns
         {
             return $";   Padding = {(Padding == null ? "null" : Padding.Length.ToString())}";
         }
-
     }
 }

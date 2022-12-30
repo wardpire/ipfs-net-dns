@@ -44,44 +44,62 @@ namespace Makaretu.Dns
         /// </remarks>
         public static Dictionary<SecurityAlgorithm, Metadata> Algorithms;
 
-
         static SecurityAlgorithmRegistry()
         {
-            Algorithms = new Dictionary<SecurityAlgorithm, Metadata>();
-            Algorithms.Add(SecurityAlgorithm.RSASHA1, new Metadata
+            Algorithms = new Dictionary<SecurityAlgorithm, Metadata>
             {
-                HashAlgorithm = DigestType.Sha1,
-            });
-            Algorithms.Add(SecurityAlgorithm.RSASHA256, new Metadata
-            {
-                HashAlgorithm = DigestType.Sha256,
-            });
-            Algorithms.Add(SecurityAlgorithm.RSASHA512, new Metadata
-            {
-                HashAlgorithm = DigestType.Sha512,
-            });
-            Algorithms.Add(SecurityAlgorithm.DSA, new Metadata
-            {
-                HashAlgorithm = DigestType.Sha1,
-            });
-            Algorithms.Add(SecurityAlgorithm.ECDSAP256SHA256, new Metadata
-            {
-                HashAlgorithm = DigestType.Sha256,
-                OtherNames = new string[] { "nistP256", "ECDSA_P256" },
-            });
-            Algorithms.Add(SecurityAlgorithm.ECDSAP384SHA384, new Metadata
-            {
-                HashAlgorithm = DigestType.Sha384,
-                OtherNames = new string[] { "nistP384", "ECDSA_P384" },
-            });
+                {
+                    SecurityAlgorithm.RSASHA1,
+                    new Metadata
+                    {
+                        HashAlgorithm = DigestType.Sha1,
+                    }
+                },
+                {
+                    SecurityAlgorithm.RSASHA256,
+                    new Metadata
+                    {
+                        HashAlgorithm = DigestType.Sha256,
+                    }
+                },
+                {
+                    SecurityAlgorithm.RSASHA512,
+                    new Metadata
+                    {
+                        HashAlgorithm = DigestType.Sha512,
+                    }
+                },
+                {
+                    SecurityAlgorithm.DSA,
+                    new Metadata
+                    {
+                        HashAlgorithm = DigestType.Sha1,
+                    }
+                },
+                {
+                    SecurityAlgorithm.ECDSAP256SHA256,
+                    new Metadata
+                    {
+                        HashAlgorithm = DigestType.Sha256,
+                        OtherNames = new string[] { "nistP256", "ECDSA_P256" },
+                    }
+                },
+                {
+                    SecurityAlgorithm.ECDSAP384SHA384,
+                    new Metadata
+                    {
+                        HashAlgorithm = DigestType.Sha384,
+                        OtherNames = new string[] { "nistP384", "ECDSA_P384" },
+                    }
+                }
+            };
 
             Algorithms.Add(SecurityAlgorithm.RSASHA1NSEC3SHA1, Algorithms[SecurityAlgorithm.RSASHA1]);
             Algorithms.Add(SecurityAlgorithm.DSANSEC3SHA1, Algorithms[SecurityAlgorithm.DSA]);
         }
 
-
         /// <summary>
-        ///   Gets the meta data for the the <see cref="SecurityAlgorithm"/>.
+        ///   Gets the meta data for the <see cref="SecurityAlgorithm"/>.
         /// </summary>
         /// <param name="algorithm">
         ///   One of the <see cref="SecurityAlgorithm"/> values.

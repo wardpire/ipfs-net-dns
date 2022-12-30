@@ -15,7 +15,6 @@ namespace Makaretu.Dns
         /// </summary>
         public byte[] Data { get; set; }
 
-
         /// <inheritdoc />
         public override void ReadData(WireReader reader, int length)
         {
@@ -33,6 +32,5 @@ namespace Makaretu.Dns
         {
             writer.WriteBytes(Data);
         }
-
     }
 }

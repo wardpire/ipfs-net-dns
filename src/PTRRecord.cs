@@ -32,7 +32,6 @@ namespace Makaretu.Dns
         /// </summary>
         public DomainName DomainName { get; set; }
 
-
         /// <inheritdoc />
         public override void ReadData(WireReader reader, int length)
         {
@@ -56,6 +55,5 @@ namespace Makaretu.Dns
         {
             writer.WriteDomainName(DomainName, appendSpace: false);
         }
-
     }
 }

@@ -24,15 +24,17 @@ namespace Makaretu.Dns
         ///   The key is the <see cref="DigestType"/>.
         ///   The value is a function that returns a new <see cref="ResourceRecord"/>.
         /// </remarks>
-        public static Dictionary<DigestType, Func<HashAlgorithm>> Digests;
+        public static readonly Dictionary<DigestType, Func<HashAlgorithm>> Digests;
 
         static DigestRegistry()
         {
-            Digests = new Dictionary<DigestType, Func<HashAlgorithm>>();
-            Digests.Add(DigestType.Sha1, () => SHA1.Create());
-            Digests.Add(DigestType.Sha256, () => SHA256.Create());
-            Digests.Add(DigestType.Sha384, () => SHA384.Create());
-            Digests.Add(DigestType.Sha512, () => SHA512.Create());
+            Digests = new Dictionary<DigestType, Func<HashAlgorithm>>
+            {
+                { DigestType.Sha1, SHA1.Create },
+                { DigestType.Sha256, SHA256.Create },
+                { DigestType.Sha384, SHA384.Create },
+                { DigestType.Sha512, SHA512.Create }
+            };
         }
 
         /// <summary>
@@ -50,7 +52,7 @@ namespace Makaretu.Dns
         /// </exception>
         public static HashAlgorithm Create(DigestType digestType)
         {
-            if (Digests.TryGetValue(digestType, out Func<HashAlgorithm> maker)) 
+            if (Digests.TryGetValue(digestType, out Func<HashAlgorithm> maker))
             {
                 return maker();
             }

@@ -3,9 +3,8 @@ using System.Linq;
 
 namespace Makaretu.Dns
 {
-
     /// <summary>
-    /// A resource record or query type. 
+    /// A resource record or query type.
     /// </summary>
     /// <seealso cref="Question.Type"/>
     /// <seealso cref="ResourceRecord.Type"/>

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Makaretu.Dns
 {
     /// <summary>
-    /// A domain name consists of one or more parts, <see cref="Labels"/>, that are 
+    /// A domain name consists of one or more parts, <see cref="Labels"/>, that are
     /// conventionally delimited by dots, such as "example.org".
     /// </summary>
     /// <remarks>
@@ -16,12 +16,12 @@ namespace Makaretu.Dns
     /// </remarks>
     public class DomainName : IEquatable<DomainName>
     {
-        const string dot = ".";
-        const char dotChar = '.';
-        const string escapedDot = @"\.";
-        const string backslash = @"\";
-        const char backslashChar = '\\';
-        const string escapedBackslash = @"\092";
+        private const string dot = ".";
+        private const char dotChar = '.';
+        private const string escapedDot = @"\.";
+        private const string backslash = @"\";
+        private const char backslashChar = '\\';
+        private const string escapedBackslash = @"\092";
 
         /// <summary>
         ///   The root name space.
@@ -30,14 +30,14 @@ namespace Makaretu.Dns
         ///  The empty string.
         /// </value>
         /// <remarks>
-        ///   The DNS is a hierarchical naming system for computers, services, or any 
-        ///   resource participating in the Internet. The top of that hierarchy is 
+        ///   The DNS is a hierarchical naming system for computers, services, or any
+        ///   resource participating in the Internet. The top of that hierarchy is
         ///   the root domain. The root domain does not have a formal name and its
-        ///   label in the DNS hierarchy is an empty string. 
+        ///   label in the DNS hierarchy is an empty string.
         /// </remarks>
-        public static DomainName Root = new DomainName(String.Empty);
+        public static DomainName Root = new DomainName(string.Empty);
 
-        List<string> labels = new List<string>();
+        private List<string> labels = new List<string>();
 
         /// <summary>
         ///   A sequence of labels that make up the domain name.
@@ -59,7 +59,7 @@ namespace Makaretu.Dns
         /// </param>
         /// <remarks>
         ///   The name can contain backslash to escape a character.
-        ///   See <see href="https://tools.ietf.org/html/rfc4343">RFC 4343</see> 
+        ///   See <see href="https://tools.ietf.org/html/rfc4343">RFC 4343</see>
         ///   for the character escaping rules.
         ///   <note>
         ///   To use us backslash in a domain name (highly unusaual), you must use a double backslash.
@@ -118,7 +118,7 @@ namespace Makaretu.Dns
             return string.Join(dot, Labels.Select(EscapeLabel));
         }
 
-        string EscapeLabel(string label)
+        private string EscapeLabel(string label)
         {
             var sb = new StringBuilder();
             foreach (var c in label)
@@ -228,7 +228,7 @@ namespace Makaretu.Dns
             return new DomainName(labels.Skip(1).ToArray());
         }
 
-        void Parse(string name)
+        private void Parse(string name)
         {
             labels.Clear();
             var label = new StringBuilder();
@@ -270,7 +270,6 @@ namespace Makaretu.Dns
             {
                 labels.Add(label.ToString());
             }
-
         }
 
         /// <inheritdoc />
@@ -283,9 +282,8 @@ namespace Makaretu.Dns
         public override bool Equals(object obj)
         {
             var that = obj as DomainName;
-            return (that == null)
-               ? false
-               : this.Equals(that);
+            return (that != null)
+               && this.Equals(that);
         }
 
         /// <inheritdoc />
@@ -361,12 +359,7 @@ namespace Makaretu.Dns
         /// </remarks>
         public static bool LabelsEqual(string a, string b)
         {
-#if NETSTANDARD14
-            return a?.ToLowerInvariant() == b?.ToLowerInvariant();
-#else
-            return 0 == StringComparer.InvariantCultureIgnoreCase.Compare(a, b);
-#endif
+            return a.Equals(b, StringComparison.OrdinalIgnoreCase);
         }
-
     }
 }

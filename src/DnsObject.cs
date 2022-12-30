@@ -153,6 +153,5 @@ namespace Makaretu.Dns
 
         /// <inheritdoc />
         public abstract void Write(WireWriter writer);
-
     }
 }

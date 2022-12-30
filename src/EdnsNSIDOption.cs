@@ -41,6 +41,5 @@ namespace Makaretu.Dns
         {
             writer.WriteBytes(Id);
         }
-
     }
 }

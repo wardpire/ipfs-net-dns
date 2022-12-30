@@ -37,6 +37,5 @@ namespace Makaretu.Dns
         {
             return $";   Type = {Type}; Data = {Convert.ToBase64String(Data)}";
         }
-
     }
 }

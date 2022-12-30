@@ -15,9 +15,9 @@ namespace Makaretu.Dns
         /// <summary>
         ///   Creates a new instance of the <see cref="AddressRecord"/> class.
         /// </summary>
-        public AddressRecord() : base()
+        protected AddressRecord()
         {
-            TTL = ResourceRecord.DefaultHostTTL;
+            TTL = DefaultHostTTL;
         }
 
         /// <summary>

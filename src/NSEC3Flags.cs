@@ -15,11 +15,9 @@ namespace Makaretu.Dns
     [Flags]
     public enum NSEC3Flags : byte
     {
-
         /// <summary>
         ///   Indicates uncovered unsigned delegations.
         /// </summary>
         OptOut = 0x01,
     }
-
 }

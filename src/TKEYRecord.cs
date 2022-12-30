@@ -37,7 +37,7 @@ namespace Makaretu.Dns
         ///   Identifies the HMAC alogirthm.
         /// </value>
         /// <remarks>
-        ///   The algorithm determines how the secret keying material agreed to 
+        ///   The algorithm determines how the secret keying material agreed to
         ///   using the TKEY RR is actually used to derive the algorithm specific key.
         /// </remarks>
         /// <seealso cref="TSIGRecord.Algorithm"/>
@@ -133,5 +133,4 @@ namespace Makaretu.Dns
             writer.WriteBase64String(OtherData ?? NoData, appendSpace: false);
         }
     }
-
 }

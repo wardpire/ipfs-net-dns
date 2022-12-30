@@ -10,7 +10,7 @@ namespace Makaretu.Dns
     ///   Extension methods for <see cref="IPAddress"/>.
     /// </summary>
     /// <remarks>
-    ///   Original code copied from <see href="https://github.com/MichaCo/DnsClient.NET/blob/dev/src/DnsClient/IpAddressExtensions.cs"/> 
+    ///   Original code copied from <see href="https://github.com/MichaCo/DnsClient.NET/blob/dev/src/DnsClient/IpAddressExtensions.cs"/>
     /// </remarks>
     public static class IPAddressExtensions
     {
@@ -32,7 +32,7 @@ namespace Makaretu.Dns
                 // reveresed bytes need to be split into 4 bit parts and separated by '.'
                 var newBytes = bytes
                     .SelectMany(b => new[] { (b >> 0) & 0xf, (b >> 4) & 0xf })
-                    .Aggregate(new StringBuilder(), (s, b) => s.Append(b.ToString("x")).Append(".")) + "ip6.arpa";
+                    .Aggregate(new StringBuilder(), (s, b) => s.Append(b.ToString("x")).Append('.')) + "ip6.arpa";
 
                 return newBytes;
             }

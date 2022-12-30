@@ -13,9 +13,9 @@ namespace Makaretu.Dns
     /// </summary>
     public class PresentationWriter
     {
-        static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        private static readonly DateTime UnixEpoch = new(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
-        TextWriter text;
+        private readonly TextWriter text;
 
         /// <summary>
         ///   Creates a new instance of the <see cref="PresentationWriter"/> using the
@@ -170,7 +170,7 @@ namespace Makaretu.Dns
         /// </param>
         public void WriteBase16String(byte[] value, bool appendSpace = true)
         {
-            WriteString(Base16.EncodeLower(value), appendSpace);
+            WriteString(Base16.LowerCase.Encode(value), appendSpace);
         }
 
         /// <summary>
@@ -290,6 +290,5 @@ namespace Makaretu.Dns
             if (appendSpace)
                 WriteSpace();
         }
-
     }
 }

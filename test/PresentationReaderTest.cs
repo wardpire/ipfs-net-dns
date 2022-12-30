@@ -7,7 +7,6 @@ using System.Net;
 
 namespace Makaretu.Dns
 {
-
     [TestClass]
     public class PresentationReaderTest
     {
@@ -318,8 +317,9 @@ mail3         IN  A     192.0.2.5             ; IPv4 address for mail3.example.c
         [TestMethod]
         [ExpectedException(typeof(FormatException))]
         public void ReadResourceData_BadHex_BadDigit()
+
         {
-            var reader = new PresentationReader(new StringReader("\\# 3 ab cd ez"));
+            var reader = new PresentationReader(new StringReader("\\/# 3 ab cd ez"));
             var _ = reader.ReadResourceData();
         }
 
@@ -380,7 +380,7 @@ mail3         IN  A     192.0.2.5             ; IPv4 address for mail3.example.c
         [TestMethod]
         public void ReadMultipleStrings2()
         {
-            var expected = new List<string> { "abc", "def", "ghi", "jkl"};
+            var expected = new List<string> { "abc", "def", "ghi", "jkl" };
             var reader = new PresentationReader(new StringReader("abc def (\r\nghi) jkl   \r\n"));
             var actual = new List<string>();
             while (!reader.IsEndOfLine())
@@ -463,6 +463,5 @@ mail3         IN  A     192.0.2.5             ; IPv4 address for mail3.example.c
             Assert.AreEqual(drSmith, reader.ReadDomainName());
             Assert.AreEqual(foo, reader.ReadDomainName());
         }
-
     }
 }

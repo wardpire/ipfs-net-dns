@@ -64,6 +64,5 @@ namespace Makaretu.Dns
         {
             return $";   Keepalive = {Timeout}";
         }
-
     }
 }
