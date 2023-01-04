@@ -13,15 +13,15 @@
     
     <!-- Nuget specs -->
     <PackageId>Makaretu.Dns</PackageId>
-    <Authors>Richard Schneider</Authors>
+    <Authors>Myina</Authors>
     <Title>DNS Object Model</Title>
     <Description>DNS data model with serializer/deserializer for the wire and master file format.</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>https://github.com/richardschneider/net-dns/releases</PackageReleaseNotes>
-    <Copyright>© 2018-2019 Richard Schneider</Copyright>
+    <PackageReleaseNotes>https://github.com/Myina/net-dns/releases</PackageReleaseNotes>
+    <Copyright>© 2022 Myina</Copyright>
     <PackageTags>dns</PackageTags>
     <IncludeSymbols>True</IncludeSymbols>
-    <PackageProjectUrl>https://github.com/richardschneider/net-dns</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/Myina/net-dns</PackageProjectUrl>
 
     <GeneratePackageOnBuild Condition=" '$(Configuration)' == 'Release' ">true</GeneratePackageOnBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
