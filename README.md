@@ -1,6 +1,6 @@
 # net-dns
 
-[![build status](https://ci.appveyor.com/api/projects/status/github/jdomnitz/net-dns?branch=master&svg=true)](https://ci.appveyor.com/project/jdomnitz/net-dns) 
+[![Build](https://github.com/jdomnitz/net-dns/actions/workflows/dotnet.yml/badge.svg)](https://github.com/jdomnitz/net-dns/actions/workflows/dotnet.yml) 
 [![travis build](https://travis-ci.org/jdomnitz/net-dns.svg?branch=master)](https://travis-ci.org/jdomnitz/net-dns)
 [![Coverage Status](https://coveralls.io/repos/jdomnitz/net-dns/badge.svg?branch=master&service=github)](https://coveralls.io/github/richardschneider/net-dns?branch=master)
 [![Version](https://img.shields.io/nuget/v/Makaretu.Dns.New.svg)](https://www.nuget.org/packages/Makaretu.Dns.New)
