@@ -1,9 +1,4 @@
-﻿using SimpleBase;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System;
 
 namespace Makaretu.Dns
 {
@@ -78,7 +73,7 @@ namespace Makaretu.Dns
 
             var salt = reader.ReadString();
             if (salt != "-")
-                Salt = Base16.Decode(salt);
+                Salt = BaseConvert.FromBase16(salt);
         }
 
         /// <inheritdoc />

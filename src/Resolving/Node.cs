@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Text;
-
-namespace Makaretu.Dns.Resolving
+﻿namespace Makaretu.Dns.Resolving
 {
     /// <summary>
     ///   Locally held information on a domain name. 

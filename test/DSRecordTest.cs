@@ -1,9 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SimpleBase;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 
 namespace Makaretu.Dns
 {

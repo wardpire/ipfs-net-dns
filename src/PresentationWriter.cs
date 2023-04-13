@@ -1,10 +1,7 @@
-﻿using SimpleBase;
-using System;
-using System.Linq;
+﻿using System;
 using System.Globalization;
 using System.IO;
 using System.Net;
-using System.Text;
 
 namespace Makaretu.Dns
 {
@@ -170,7 +167,7 @@ namespace Makaretu.Dns
         /// </param>
         public void WriteBase16String(byte[] value, bool appendSpace = true)
         {
-            WriteString(Base16.EncodeLower(value), appendSpace);
+            WriteString(BaseConvert.ToBase16Lower(value), appendSpace);
         }
 
         /// <summary>
