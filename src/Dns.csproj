@@ -7,8 +7,8 @@
     <DebugType>portable</DebugType>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 
-    <AssemblyVersion>3.0.0</AssemblyVersion>
-    <Version>3.0.0</Version>
+    <AssemblyVersion>3.0.1</AssemblyVersion>
+    <Version>3.0.1</Version>
     
     <!-- Nuget specs -->
     <PackageId>Makaretu.Dns.New</PackageId>
@@ -17,7 +17,7 @@
     <Description>DNS data model with serializer/deserializer for the wire and master file format.</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageReleaseNotes>https://github.com/jdomnitz/net-dns/releases</PackageReleaseNotes>
-    <Copyright>© 2018-2019 Richard Schneider</Copyright>
+    <Copyright>© 2018-2019 Richard Schneider, 2023+ additions jdomnitz</Copyright>
     <PackageTags>dns</PackageTags>
     <IncludeSymbols>True</IncludeSymbols>
     <PackageProjectUrl>https://github.com/jdomnitz/net-dns</PackageProjectUrl>
