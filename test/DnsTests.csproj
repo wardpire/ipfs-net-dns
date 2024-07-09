@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0; net8.0; netstandard2.0; net481</TargetFrameworks>
+    <TargetFrameworks>net6.0; net8.0; net481</TargetFrameworks>
     <IsPackable>false</IsPackable>
     <DebugType>full</DebugType>
     <RootNamespace>Makaretu.Dns</RootNamespace>
@@ -23,11 +23,11 @@
     <PackageReference Include="coverlet.msbuild" Version="6.0.2" PrivateAssets="all" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' != 'netstandard2.0' And '$(TargetFramework)' != 'net481'">
+  <ItemGroup Condition="'$(TargetFramework)' != 'netcoreapp2.1' And '$(TargetFramework)' != 'net481'">
 	<PackageReference Include="SimpleBase" Version="4.0.0" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' Or '$(TargetFramework)' == 'net481'">
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.1' Or '$(TargetFramework)' == 'net481'">
     <PackageReference Include="SimpleBase" Version="2.1.0" />
   </ItemGroup>
 

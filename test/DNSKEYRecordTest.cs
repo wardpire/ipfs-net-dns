@@ -154,7 +154,7 @@ namespace Makaretu.Dns
         [TestMethod]
         public void FromECDsaP256()
         {
-#if (NET45 || NETCOREAPP1_1)
+#if (!NETSTANDARD2_0_OR_GREATER &&!NET472_OR_GREATER && !NET6_0_OR_GREATER)
             Assert.Inconclusive("ECDsa is not available.");
 #else
             // From https://tools.ietf.org/html/rfc6605#section-6.1
@@ -192,7 +192,7 @@ namespace Makaretu.Dns
         [TestMethod]
         public void FromECDsaP384()
         {
-#if (NET45 || NETCOREAPP1_1)
+#if (!NETSTANDARD2_0_OR_GREATER &&!NET472_OR_GREATER && !NET6_0_OR_GREATER)
             Assert.Inconclusive("ECDsa is not available.");
 #else
             // From https://tools.ietf.org/html/rfc6605#section-6.2
