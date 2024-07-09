@@ -111,9 +111,13 @@ namespace Makaretu.Dns
             if (value == string.Empty)
                 needQuote = true;
             value = value.Replace("\\", "\\\\").Replace("\"", "\\\"");
+#if !NET6_0_OR_GREATER
+            if (value.Contains(" "))
+                needQuote = true;
+#else
             if (value.Contains(' '))
                 needQuote = true;
-
+#endif
             if (needQuote)
                 text.Write('"');
             text.Write(value);

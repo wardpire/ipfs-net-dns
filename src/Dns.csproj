@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0; net8.0</TargetFrameworks>
+    <TargetFrameworks>net6.0; net8.0; netstandard20; netframework481</TargetFrameworks>
     <AssemblyName>Makaretu.Dns</AssemblyName>
     <RootNamespace>Makaretu.Dns</RootNamespace>
     <DebugType>portable</DebugType>

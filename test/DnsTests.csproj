@@ -1,8 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net60</TargetFrameworks>
-
+    <TargetFrameworks>net60; net80</TargetFrameworks>
     <IsPackable>false</IsPackable>
     <DebugType>full</DebugType>
     <RootNamespace>Makaretu.Dns</RootNamespace>
