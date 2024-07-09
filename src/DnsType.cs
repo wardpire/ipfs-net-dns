@@ -136,11 +136,71 @@ namespace Makaretu.Dns
         AFSDB = 18,
 
         /// <summary>
+        ///  X.25 PSDN address.
+        /// </summary>
+        /// <seealso href="https://tools.ietf.org/html/rfc1183#section-1">RFC 1183</seealso>
+        X25 = 19,
+
+        /// <summary>
+        ///  ISDN address.
+        /// </summary>
+        /// <seealso href="https://tools.ietf.org/html/rfc1183#section-1">RFC 1183</seealso>
+        ISDN = 20,
+
+        /// <summary>
+        ///  Route Through.
+        /// </summary>
+        /// <seealso href="https://tools.ietf.org/html/rfc1183#section-1">RFC 1183</seealso>
+        RT = 21,
+
+        /// <summary>
+        ///  NSAP style A record (Historic)
+        /// </summary>
+        [Obsolete("Historic")]
+        NSAP = 22,
+
+        /// <summary>
+        ///  Domain name pointer, NSAP style (Historic)
+        /// </summary>
+        [Obsolete("Historic")]
+        NSAPPTR = 23,
+
+        /// <summary>
+        /// Security signature
+        /// </summary>
+        /// <seealso href="https://tools.ietf.org/html/rfc4034">RFC 4034</seealso>
+        SIG = 24,
+
+        /// <summary>
+        /// Security Key
+        /// </summary>
+        /// <seealso href="https://tools.ietf.org/html/rfc4034">RFC 4034</seealso>
+        KEY = 25,
+
+        /// <summary>
+        /// X.400 mail mapping information
+        /// </summary>
+        /// <seealso href="https://tools.ietf.org/html/rfc2163">RFC 2163</seealso>
+        PX = 26,
+
+        /// <summary>
+        /// Geographical Position
+        /// </summary>
+        /// <seealso href="https://tools.ietf.org/html/rfc1712">RFC 1712</seealso>
+        GPOS = 27,
+
+        /// <summary>
         /// An IPv6 host address.
         /// </summary>
         /// <seealso href="https://tools.ietf.org/html/rfc3596#section-2.2">RFC 3596</seealso>
         /// <seealso cref="AAAARecord"/>
         AAAA = 28,
+
+        /// <summary>
+        /// Location Information
+        /// </summary>
+        /// <seealso href="https://tools.ietf.org/html/rfc1876">RFC 1876</seealso>
+        LOC = 29,
 
         /// <summary>
         /// A resource record which specifies the location of the server(s) for a specific protocol and domain.

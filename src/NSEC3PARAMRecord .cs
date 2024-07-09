@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Makaretu.Dns
+﻿namespace Makaretu.Dns
 {
     /// <summary>
     ///   Parameters needed by authoritative servers to calculate hashed owner names.

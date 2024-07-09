@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace Makaretu.Dns
+﻿namespace Makaretu.Dns
 {
     /// <summary>
     ///   Extended DNS Errors

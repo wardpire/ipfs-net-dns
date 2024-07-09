@@ -32,7 +32,7 @@ DNS data model with serializer/deserializer for the wire and "master file" forma
   - [RFC 7828](https://tools.ietf.org/html/rfc7828) The edns-tcp-keepalive EDNS0 Option
   - [RFC 7830](https://tools.ietf.org/html/rfc7830) The EDNS(0) Padding Option
   - [RFC 8914](https://tools.ietf.org/html/rfc8914) Extended DNS Errors
-- Targets .Net 6.0
+- Targets .Net 6.0, 8.0
 
 ## Getting started
 
