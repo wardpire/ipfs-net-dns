@@ -10,10 +10,7 @@ namespace Makaretu.Dns
     ///   Provides helper methods for <see cref="IWireSerialiser">wire serialisation</see>,
     ///   cloning and caching.
     /// </remarks>
-    public abstract class DnsObject : IWireSerialiser
-#if !NETSTANDARD14
-        , ICloneable
-#endif
+    public abstract class DnsObject : IWireSerialiser, ICloneable
     {
         /// <summary>
         ///   When the object was created.

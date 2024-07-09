@@ -10,9 +10,7 @@ namespace Makaretu.Dns
     /// </summary>
     public class PresentationWriter
     {
-        static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-
-        TextWriter text;
+        readonly TextWriter text;
 
         /// <summary>
         ///   Creates a new instance of the <see cref="PresentationWriter"/> using the

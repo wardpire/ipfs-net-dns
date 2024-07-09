@@ -18,7 +18,6 @@ namespace Makaretu.Dns
         const string dot = ".";
         const char dotChar = '.';
         const string escapedDot = @"\.";
-        const string backslash = @"\";
         const char backslashChar = '\\';
         const string escapedBackslash = @"\092";
 
@@ -34,9 +33,9 @@ namespace Makaretu.Dns
         ///   the root domain. The root domain does not have a formal name and its
         ///   label in the DNS hierarchy is an empty string. 
         /// </remarks>
-        public static DomainName Root = new DomainName(String.Empty);
+        public static readonly DomainName Root = new DomainName(String.Empty);
 
-        List<string> labels = new List<string>();
+        readonly List<string> labels = new List<string>();
 
         /// <summary>
         ///   A sequence of labels that make up the domain name.
@@ -282,9 +281,7 @@ namespace Makaretu.Dns
         public override bool Equals(object obj)
         {
             var that = obj as DomainName;
-            return (that == null)
-               ? false
-               : this.Equals(that);
+            return that != null && this.Equals(that);
         }
 
         /// <inheritdoc />
@@ -360,11 +357,7 @@ namespace Makaretu.Dns
         /// </remarks>
         public static bool LabelsEqual(string a, string b)
         {
-#if NETSTANDARD14
-            return a?.ToLowerInvariant() == b?.ToLowerInvariant();
-#else
             return 0 == StringComparer.InvariantCultureIgnoreCase.Compare(a, b);
-#endif
         }
 
     }

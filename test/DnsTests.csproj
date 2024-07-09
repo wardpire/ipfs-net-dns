@@ -1,10 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net60; net80</TargetFrameworks>
+    <TargetFrameworks>net6.0; net8.0; netstandard2.0; net481</TargetFrameworks>
     <IsPackable>false</IsPackable>
     <DebugType>full</DebugType>
     <RootNamespace>Makaretu.Dns</RootNamespace>
+    <IsTestProject>true</IsTestProject>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -16,21 +17,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" PrivateAssets="all" />
     <PackageReference Include="MSTest.TestAdapter" Version="3.4.3" PrivateAssets="all" />
     <PackageReference Include="MSTest.TestFramework" Version="3.4.3" PrivateAssets="all" />
-
     <PackageReference Include="coverlet.msbuild" Version="6.0.2" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' != 'netstandard2.0' And '$(TargetFramework)' != 'net481'">
 	<PackageReference Include="SimpleBase" Version="4.0.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' Or '$(TargetFramework)' == 'net481'">
+    <PackageReference Include="SimpleBase" Version="2.1.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\src\Dns.csproj" />
-  </ItemGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.1'">
-    <PackageReference Include="System.Security.Cryptography.Algorithms" Version="4.3.1" />
   </ItemGroup>
 
 </Project>
