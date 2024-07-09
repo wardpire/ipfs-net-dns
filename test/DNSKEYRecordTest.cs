@@ -175,7 +175,15 @@ namespace Makaretu.Dns
                     Y = qy,
                 }
             };
-            ECDsa publicKey = ECDsa.Create(parameters);
+            ECDsa publicKey;
+            try
+            {
+                publicKey = ECDsa.Create(parameters);
+            }catch(NotImplementedException)
+            {
+                Assert.Inconclusive("Platform does not support nistP256");
+                return;
+            }
 
             var dnskey = new DNSKEYRecord(publicKey)
             {
@@ -213,7 +221,16 @@ namespace Makaretu.Dns
                     Y = qy,
                 }
             };
-            ECDsa publicKey = ECDsa.Create(parameters);
+            ECDsa publicKey;
+            try
+            {
+                publicKey = ECDsa.Create(parameters);
+            }
+            catch (NotImplementedException)
+            {
+                Assert.Inconclusive("Platform does not support nistP384");
+                return;
+            }
 
             var dnskey = new DNSKEYRecord(publicKey)
             {
