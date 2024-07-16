@@ -27,6 +27,7 @@ namespace Makaretu.Dns
             Register<EdnsDAUOption>();
             Register<EdnsDHUOption>();
             Register<EdnsN3UOption>();
+            Register<EdnsErrorOption>();
         }
 
         /// <summary>
