@@ -103,7 +103,7 @@ namespace Makaretu.Dns
         }
 
         /// <summary>
-        ///   Returns the textual representation.
+        ///   Returns the textual representation escaped as described in RFC 4343 Section 2.1.
         /// </summary>
         /// <returns>
         ///   The concatenation of the <see cref="Labels"/> separated by a dot.
