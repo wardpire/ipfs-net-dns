@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-
-namespace Makaretu.Dns
+﻿namespace Makaretu.Dns
 {
     /// <summary>
     ///   Contains some information on an Extended DNS option.

@@ -1,9 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SimpleBase;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Security.Cryptography;
 
 namespace Makaretu.Dns
@@ -158,7 +154,7 @@ namespace Makaretu.Dns
         [TestMethod]
         public void FromECDsaP256()
         {
-#if (NET45 || NETCOREAPP1_1)
+#if (!NETSTANDARD2_0_OR_GREATER &&!NET472_OR_GREATER && !NET6_0_OR_GREATER)
             Assert.Inconclusive("ECDsa is not available.");
 #else
             // From https://tools.ietf.org/html/rfc6605#section-6.1
@@ -179,7 +175,15 @@ namespace Makaretu.Dns
                     Y = qy,
                 }
             };
-            ECDsa publicKey = ECDsa.Create(parameters);
+            ECDsa publicKey;
+            try
+            {
+                publicKey = ECDsa.Create(parameters);
+            }catch(NotImplementedException)
+            {
+                Assert.Inconclusive("Platform does not support nistP256");
+                return;
+            }
 
             var dnskey = new DNSKEYRecord(publicKey)
             {
@@ -196,7 +200,7 @@ namespace Makaretu.Dns
         [TestMethod]
         public void FromECDsaP384()
         {
-#if (NET45 || NETCOREAPP1_1)
+#if (!NETSTANDARD2_0_OR_GREATER &&!NET472_OR_GREATER && !NET6_0_OR_GREATER)
             Assert.Inconclusive("ECDsa is not available.");
 #else
             // From https://tools.ietf.org/html/rfc6605#section-6.2
@@ -217,7 +221,16 @@ namespace Makaretu.Dns
                     Y = qy,
                 }
             };
-            ECDsa publicKey = ECDsa.Create(parameters);
+            ECDsa publicKey;
+            try
+            {
+                publicKey = ECDsa.Create(parameters);
+            }
+            catch (NotImplementedException)
+            {
+                Assert.Inconclusive("Platform does not support nistP384");
+                return;
+            }
 
             var dnskey = new DNSKEYRecord(publicKey)
             {

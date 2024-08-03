@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Makaretu.Dns
+﻿namespace Makaretu.Dns
 {
     /// <summary>
     ///   Wire format serialisation of a DNS object.

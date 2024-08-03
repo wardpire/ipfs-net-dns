@@ -1,9 +1,5 @@
-﻿using SimpleBase;
-using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Makaretu.Dns
 {
@@ -99,9 +95,9 @@ namespace Makaretu.Dns
 
             var salt = reader.ReadString();
             if (salt != "-")
-                Salt = Base16.Decode(salt);
+                Salt = BaseConvert.FromBase16(salt);
 
-            NextHashedOwnerName = Base32.ExtendedHex.Decode(reader.ReadString());
+            NextHashedOwnerName = BaseConvert.FromBase32Hex(reader.ReadString());
 
             while (!reader.IsEndOfLine())
             {
@@ -125,7 +121,7 @@ namespace Makaretu.Dns
                 writer.WriteBase16String(Salt);
             }
 
-            writer.WriteString(Base32.ExtendedHex.Encode(NextHashedOwnerName, padding: false).ToLowerInvariant());
+            writer.WriteString(BaseConvert.ToBase32Hex(NextHashedOwnerName).ToLowerInvariant());
 
             bool next = false;
             foreach (var type in Types)

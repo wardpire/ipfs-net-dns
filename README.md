@@ -1,10 +1,8 @@
 # net-dns
 
-[![build status](https://ci.appveyor.com/api/projects/status/github/richardschneider/net-dns?branch=master&svg=true)](https://ci.appveyor.com/project/richardschneider/net-dns) 
-[![travis build](https://travis-ci.org/richardschneider/net-dns.svg?branch=master)](https://travis-ci.org/richardschneider/net-dns)
-[![Coverage Status](https://coveralls.io/repos/richardschneider/net-dns/badge.svg?branch=master&service=github)](https://coveralls.io/github/richardschneider/net-dns?branch=master)
-[![Version](https://img.shields.io/nuget/v/Makaretu.Dns.svg)](https://www.nuget.org/packages/Makaretu.Dns)
-[![docs](https://cdn.rawgit.com/richardschneider/net-dns/master/doc/images/docs-latest-green.svg)](https://richardschneider.github.io/net-dns/articles/intro.html)
+[![Build](https://github.com/jdomnitz/net-dns/actions/workflows/dotnet.yml/badge.svg)](https://github.com/jdomnitz/net-dns/actions/workflows/dotnet.yml) 
+[![Version](https://img.shields.io/nuget/v/Makaretu.Dns.New.svg)](https://www.nuget.org/packages/Makaretu.Dns.New)
+[![docs](https://cdn.rawgit.com/jdomnitz/net-dns/master/doc/images/docs-latest-green.svg)](https://richardschneider.github.io/net-dns/articles/intro.html)
 
 DNS data model with serializer/deserializer for the wire and "master file" format.
 
@@ -33,14 +31,14 @@ DNS data model with serializer/deserializer for the wire and "master file" forma
   - [RFC 6891](https://tools.ietf.org/html/rfc6891) Extension Mechanisms for DNS (EDNS(0))
   - [RFC 7828](https://tools.ietf.org/html/rfc7828) The edns-tcp-keepalive EDNS0 Option
   - [RFC 7830](https://tools.ietf.org/html/rfc7830) The EDNS(0) Padding Option
-- Targets .Net Framework 4.5 and 4.7.2 and .NET Standard 1.4 and 2.0
-- CI on Travis (Ubuntu Trusty and OSX) and AppVeyor (Windows Server 2016)
+  - [RFC 8914](https://tools.ietf.org/html/rfc8914) Extended DNS Errors
+- Targets .Net 6.0, 8.0
 
 ## Getting started
 
-Published releases are available on [NuGet](https://www.nuget.org/packages/Makaretu.Dns/).  To install, run the following command in the [Package Manager Console](https://docs.nuget.org/docs/start-here/using-the-package-manager-console).
+Published releases are available on [NuGet](https://www.nuget.org/packages/Makaretu.Dns.New/).  To install, run the following command in the [Package Manager Console](https://docs.nuget.org/docs/start-here/using-the-package-manager-console).
 
-    PM> Install-Package Makaretu.Dns
+    PM> Install-Package Makaretu.Dns.New
     
 ## Usage
 
@@ -101,7 +99,7 @@ msg.AdditionalRecords.Add(new ARecord
 
 # Related projects
 
-- [net-mdns](https://github.com/richardschneider/net-mdns) - client and server for multicast DNS
+- [net-mdns](https://github.com/jdomnitz/net-mdns) - client and server for multicast DNS
 - [net-udns](https://github.com/richardschneider/net-udns) - client for unicast DNS, DNS over HTTPS (DOH) and DNS over TLS (DOT)
 - [DNSSEC](https://www.icann.org/resources/pages/dnssec-qaa-2014-01-29-en) -  What Is It and Why Is It Important?
  
@@ -109,5 +107,3 @@ msg.AdditionalRecords.Add(new ARecord
 Copyright © 2018 Richard Schneider (makaretu@gmail.com)
 
 The package is licensed under the [MIT](http://www.opensource.org/licenses/mit-license.php "Read more about the MIT license form") license. Refer to the [LICENSE](https://github.com/richardschneider/net-dns/blob/master/LICENSE) file for more information.
-
-<a href="https://www.buymeacoffee.com/kmXOxKJ4E" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png" alt="Buy Me A Coffee" style="height: auto !important;width: auto !important;" ></a>

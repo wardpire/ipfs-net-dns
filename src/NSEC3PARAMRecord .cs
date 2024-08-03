@@ -1,11 +1,4 @@
-﻿using SimpleBase;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-
-namespace Makaretu.Dns
+﻿namespace Makaretu.Dns
 {
     /// <summary>
     ///   Parameters needed by authoritative servers to calculate hashed owner names.
@@ -78,7 +71,7 @@ namespace Makaretu.Dns
 
             var salt = reader.ReadString();
             if (salt != "-")
-                Salt = Base16.Decode(salt);
+                Salt = BaseConvert.FromBase16(salt);
         }
 
         /// <inheritdoc />

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -26,7 +23,7 @@ namespace Makaretu.Dns.Resolving
         /// </summary>
         /// <value>
         ///   <b>false</b> to answer <b>any</b> of the questions. 
-        ///   <b>false</b> to answer <b>all</b> of the questions.
+        ///   <b>true</b> to answer <b>all</b> of the questions.
         ///   The default is <b>false</b>.
         /// </value>
         /// <remarks>

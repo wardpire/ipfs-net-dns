@@ -1,10 +1,7 @@
-﻿using SimpleBase;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
-using System.Text;
 
 namespace Makaretu.Dns
 {
@@ -58,7 +55,7 @@ namespace Makaretu.Dns
             }
         }
 
-#if (!NETSTANDARD14 && !NET45)
+#if (NETSTANDARD2_0_OR_GREATER || NET472_OR_GREATER || NET6_0_OR_GREATER)
         /// <summary>
         ///   Creates a new instance of the <see cref="DNSKEYRecord"/> class
         ///   from the specified ECDSA key.

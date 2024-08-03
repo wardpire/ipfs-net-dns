@@ -1,8 +1,5 @@
-﻿using SimpleBase;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
-using System.Linq;
 using System.Text;
 
 namespace Makaretu.Dns
@@ -131,7 +128,7 @@ namespace Makaretu.Dns
             {
                 sb.Append(reader.ReadString());
             }
-            Digest = Base16.Decode(sb.ToString());
+            Digest = BaseConvert.FromBase16(sb.ToString());
         }
 
         /// <inheritdoc />

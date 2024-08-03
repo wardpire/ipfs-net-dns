@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Makaretu.Dns
+﻿namespace Makaretu.Dns
 {
     /// <summary>
     ///   The requested operation of a <see cref="Message"/>.

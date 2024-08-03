@@ -270,7 +270,8 @@ namespace Makaretu.Dns
             for (var i = 0; i < n; ++i)
             {
                 var label = labels[i];
-                if (label.Length > 63)
+                var labelBytes = Encoding.UTF8.GetBytes(label);
+                if (labelBytes.Length > 63)
                     throw new ArgumentException($"Label '{label}' cannot exceed 63 octets.");
 
                 // Check for qualified name already used.
@@ -286,8 +287,7 @@ namespace Makaretu.Dns
                 }
 
                 // Add the label
-                var bytes = Encoding.UTF8.GetBytes(label);
-                WriteByteLengthPrefixedBytes(bytes);
+                WriteByteLengthPrefixedBytes(labelBytes);
             }
 
             stream.WriteByte(0); // terminating byte
@@ -314,6 +314,32 @@ namespace Makaretu.Dns
 
             var bytes = Encoding.ASCII.GetBytes(value);
             WriteByteLengthPrefixedBytes(bytes);
+        }
+
+        /// <summary>
+        ///   Write a string.
+        /// </summary>
+        /// <exception cref="ArgumentException">
+        ///   When the length is greater than <see cref="byte.MaxValue"/>
+        /// </exception>
+        /// <remarks>
+        ///   Strings are encoded with a length prefixed byte.  All strings must be UTF-8.
+        /// </remarks>
+        public void WriteStringUTF8(string value)
+        {
+            var bytes = Encoding.UTF8.GetBytes(value);
+            WriteByteLengthPrefixedBytes(bytes);
+        }
+
+        /// <summary>
+        ///   Write a string.
+        /// </summary>
+        /// <remarks>
+        ///   Strings are encoded in UTF8.
+        /// </remarks>
+        public void WriteStringUTF8Unprefixed(string value)
+        {
+            WriteBytes(Encoding.UTF8.GetBytes(value));
         }
 
         /// <summary>

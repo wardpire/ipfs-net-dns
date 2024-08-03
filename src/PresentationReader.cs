@@ -1,5 +1,4 @@
-﻿using SimpleBase;
-using System;
+﻿using System;
 using System.Linq;
 using System.Globalization;
 using System.IO;
@@ -257,7 +256,7 @@ namespace Makaretu.Dns
             // Convert hex string into byte array.
             try
             {
-                return Base16.Decode(sb.ToString());
+                return BaseConvert.FromBase16(sb.ToString());
             }
             catch (InvalidOperationException e)
             {

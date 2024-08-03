@@ -1,10 +1,7 @@
-﻿using SimpleBase;
-using System;
-using System.Linq;
+﻿using System;
 using System.Globalization;
 using System.IO;
 using System.Net;
-using System.Text;
 
 namespace Makaretu.Dns
 {
@@ -13,9 +10,7 @@ namespace Makaretu.Dns
     /// </summary>
     public class PresentationWriter
     {
-        static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-
-        TextWriter text;
+        readonly TextWriter text;
 
         /// <summary>
         ///   Creates a new instance of the <see cref="PresentationWriter"/> using the
@@ -114,9 +109,13 @@ namespace Makaretu.Dns
             if (value == string.Empty)
                 needQuote = true;
             value = value.Replace("\\", "\\\\").Replace("\"", "\\\"");
+#if !NET6_0_OR_GREATER
+            if (value.Contains(" "))
+                needQuote = true;
+#else
             if (value.Contains(' '))
                 needQuote = true;
-
+#endif
             if (needQuote)
                 text.Write('"');
             text.Write(value);
@@ -170,7 +169,7 @@ namespace Makaretu.Dns
         /// </param>
         public void WriteBase16String(byte[] value, bool appendSpace = true)
         {
-            WriteString(Base16.EncodeLower(value), appendSpace);
+            WriteString(BaseConvert.ToBase16Lower(value), appendSpace);
         }
 
         /// <summary>

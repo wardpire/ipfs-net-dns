@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Net;
-using System.Text;
-
-namespace Makaretu.Dns
+﻿namespace Makaretu.Dns
 {
     /// <summary>
     ///   Allows administrators to use several servers for a single domain.

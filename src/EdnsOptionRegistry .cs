@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Makaretu.Dns
 {
@@ -30,6 +27,7 @@ namespace Makaretu.Dns
             Register<EdnsDAUOption>();
             Register<EdnsDHUOption>();
             Register<EdnsN3UOption>();
+            Register<EdnsErrorOption>();
         }
 
         /// <summary>

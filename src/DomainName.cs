@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Makaretu.Dns
 {
@@ -19,7 +18,6 @@ namespace Makaretu.Dns
         const string dot = ".";
         const char dotChar = '.';
         const string escapedDot = @"\.";
-        const string backslash = @"\";
         const char backslashChar = '\\';
         const string escapedBackslash = @"\092";
 
@@ -35,9 +33,9 @@ namespace Makaretu.Dns
         ///   the root domain. The root domain does not have a formal name and its
         ///   label in the DNS hierarchy is an empty string. 
         /// </remarks>
-        public static DomainName Root = new DomainName(String.Empty);
+        public static readonly DomainName Root = new DomainName(String.Empty);
 
-        List<string> labels = new List<string>();
+        readonly List<string> labels = new List<string>();
 
         /// <summary>
         ///   A sequence of labels that make up the domain name.
@@ -105,7 +103,7 @@ namespace Makaretu.Dns
         }
 
         /// <summary>
-        ///   Returns the textual representation.
+        ///   Returns the textual representation escaped as described in RFC 4343 Section 2.1.
         /// </summary>
         /// <returns>
         ///   The concatenation of the <see cref="Labels"/> separated by a dot.
@@ -283,9 +281,7 @@ namespace Makaretu.Dns
         public override bool Equals(object obj)
         {
             var that = obj as DomainName;
-            return (that == null)
-               ? false
-               : this.Equals(that);
+            return that != null && this.Equals(that);
         }
 
         /// <inheritdoc />
@@ -361,11 +357,7 @@ namespace Makaretu.Dns
         /// </remarks>
         public static bool LabelsEqual(string a, string b)
         {
-#if NETSTANDARD14
-            return a?.ToLowerInvariant() == b?.ToLowerInvariant();
-#else
             return 0 == StringComparer.InvariantCultureIgnoreCase.Compare(a, b);
-#endif
         }
 
     }
