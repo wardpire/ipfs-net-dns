@@ -45,8 +45,6 @@ namespace Makaretu.Dns
             }
         }
 
-
-
         /// <inheritdoc />
         public override void WriteData(WireWriter writer)
         {
@@ -70,6 +68,5 @@ namespace Makaretu.Dns
                 next = true;
             }
         }
-
     }
 }

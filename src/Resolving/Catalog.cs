@@ -88,7 +88,7 @@ namespace Makaretu.Dns.Resolving
         }
 
         /// <summary>
-        ///   Add or update the resource record to the catalog. 
+        ///   Add or update the resource record to the catalog.
         /// </summary>
         /// <param name="resource">
         ///   The <see cref="ResourceRecord.Name"/> is also the name of the node.
@@ -110,7 +110,7 @@ namespace Makaretu.Dns.Resolving
             var node = this.AddOrUpdate(
                 resource.Name,
                 (k) => new Node { Name = k, Authoritative = authoritative },
-                (k, n) => n
+                (_, n) => n
             );
 
             // If the resource already exist, then update the the non-equality
@@ -131,8 +131,8 @@ namespace Makaretu.Dns.Resolving
         ///   The <see cref="Node"/> that represents the "root".
         /// </returns>
         /// <remarks>
-        ///   A DNS recursive resolver typically needs a "root hints file". This file 
-        ///   contains the names and IP addresses of the authoritative name servers for the root zone, 
+        ///   A DNS recursive resolver typically needs a "root hints file". This file
+        ///   contains the names and IP addresses of the authoritative name servers for the root zone,
         ///   so the software can bootstrap the DNS resolution process.
         /// </remarks>
         public Node IncludeRootHints()
@@ -217,7 +217,7 @@ namespace Makaretu.Dns.Resolving
                     DomainName = a.Name,
                     TTL = a.TTL
                 };
-                Add(ptr, authoritative:  true);
+                Add(ptr, authoritative: true);
             }
         }
     }

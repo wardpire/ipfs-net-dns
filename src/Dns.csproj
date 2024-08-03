@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0; net8.0; netstandard2.0; net462; net481</TargetFrameworks>
+	  <TargetFramework>net7.0</TargetFramework>
     <AssemblyName>Makaretu.Dns</AssemblyName>
     <RootNamespace>Makaretu.Dns</RootNamespace>
     <DebugType>portable</DebugType>
@@ -11,7 +11,7 @@
     <Version>3.1.1</Version>
     
     <!-- Nuget specs -->
-    <PackageId>Makaretu.Dns.New</PackageId>
+    <PackageId>Makaretu.Dns</PackageId>
     <Authors>Richard Schneider</Authors>
     <Title>DNS Object Model</Title>
     <Description>DNS data model with serializer/deserializer for the wire and master file format.</Description>

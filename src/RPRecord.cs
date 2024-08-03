@@ -60,6 +60,5 @@
             writer.WriteDomainName(Mailbox);
             writer.WriteDomainName(TextName, appendSpace: false);
         }
-
     }
 }

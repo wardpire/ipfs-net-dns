@@ -4,8 +4,8 @@
     ///   Alias for a name and all its subnames.
     /// </summary>
     /// <remarks>
-    ///  Alias for a name and all its subnames, unlike <see cref="CNAMERecord"/>, which is an 
-    ///  alias for only the exact name. Like a CNAME record, the DNS lookup will continue by 
+    ///  Alias for a name and all its subnames, unlike <see cref="CNAMERecord"/>, which is an
+    ///  alias for only the exact name. Like a CNAME record, the DNS lookup will continue by
     ///  retrying the lookup with the new name.
     /// </remarks>
     public class DNAMERecord : ResourceRecord
@@ -23,7 +23,6 @@
         ///  name for the owner. The owner name is an alias.
         /// </summary>
         public DomainName Target { get; set; }
-
 
         /// <inheritdoc />
         public override void ReadData(WireReader reader, int length)
@@ -48,6 +47,5 @@
         {
             writer.WriteDomainName(Target, appendSpace: false);
         }
-
     }
 }

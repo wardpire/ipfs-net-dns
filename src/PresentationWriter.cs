@@ -289,6 +289,5 @@ namespace Makaretu.Dns
             if (appendSpace)
                 WriteSpace();
         }
-
     }
 }

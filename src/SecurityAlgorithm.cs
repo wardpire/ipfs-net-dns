@@ -1,6 +1,5 @@
 ﻿namespace Makaretu.Dns
 {
-
     /// <summary>
     ///  Identities the security algorithm used by DNSSEC resource records.
     /// </summary>

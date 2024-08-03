@@ -13,14 +13,13 @@ namespace Makaretu.Dns
     /// </summary>
     public class WireWriter
     {
-        const int maxPointer = 0x3FFF;
-        const ulong uint48MaxValue = 0XFFFFFFFFFFFFul;
-        static readonly DateTime UnixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        private const int maxPointer = 0x3FFF;
+        private const ulong uint48MaxValue = 0XFFFFFFFFFFFFul;
+        private static readonly DateTime UnixEpoch = new(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
-
-        Stream stream;
-        Dictionary<string, int> pointers = new Dictionary<string, int>();
-        Stack<Stream> scopes = new Stack<Stream>();
+        private Stream stream;
+        private Dictionary<string, int> pointers = new();
+        private Stack<Stream> scopes = new();
 
         /// <summary>
         ///   The writer relative position within the stream.
@@ -129,7 +128,7 @@ namespace Makaretu.Dns
         {
             var length = bytes?.Length ?? 0;
             if (length > byte.MaxValue)
-                throw new ArgumentException($"Length can not exceed {byte.MaxValue}.", "bytes");
+                throw new ArgumentException($"Length can not exceed {byte.MaxValue}.", nameof(bytes));
 
             WriteByte((byte)length);
             WriteBytes(bytes);
@@ -465,7 +464,7 @@ namespace Makaretu.Dns
             }
         }
 
-        static IEnumerable<Byte> ToBytes(BitArray bits, bool MSB = false)
+        private static IEnumerable<byte> ToBytes(BitArray bits, bool MSB = false)
         {
             int bitCount = 7;
             int outByte = 0;

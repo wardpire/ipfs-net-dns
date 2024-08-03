@@ -23,7 +23,7 @@
 
         /// <summary>
         ///    Meaningful only for responses from an authoritative name
-        ///    server, this code signifies that the domain name 
+        ///    server, this code signifies that the domain name
         ///    referenced in the query does not exist.
         /// </summary>
         NameError = 3,
@@ -35,7 +35,7 @@
 
         /// <summary>
         ///    The name server refuses to perform the specified operation for
-        ///    policy reasons. 
+        ///    policy reasons.
         /// </summary>
         Refused = 5,
 
@@ -100,5 +100,4 @@
         /// </summary>
         BADALG = 21,
     }
-
 }

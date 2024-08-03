@@ -22,7 +22,7 @@ namespace Makaretu.Dns.Resolving
         /// </remarks>
         public void Prune(DateTime? now = null)
         {
-            now = now ?? DateTime.Now;
+            now ??= DateTime.Now;
 
             var nodes = Catalog.Values.Where(node => !node.Authoritative);
             foreach (var node in nodes)
@@ -60,7 +60,7 @@ namespace Makaretu.Dns.Resolving
 
             return cts;
         }
-    
+
         /// <summary>
         ///   Cache the response.
         /// </summary>

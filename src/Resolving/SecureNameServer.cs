@@ -10,12 +10,12 @@ namespace Makaretu.Dns.Resolving
     public partial class NameServer
     {
         /// <summary>
-        ///   
+        /// Add Security Extensions
         /// </summary>
         /// <param name="request"></param>
         /// <param name="response"></param>
         /// <returns></returns>
-        async Task<Message> AddSecurityExtensionsAsync(Message request, Message response)
+        private async Task<Message> AddSecurityExtensionsAsync(Message request, Message response)
         {
             // If requestor doesn't do DNSSEC, then nothing more to do.
             if (!request.DO)
@@ -40,12 +40,12 @@ namespace Makaretu.Dns.Resolving
         /// <remarks>
         ///   Add the signature records (RRSIG) for each resource in the set.
         /// </remarks>
-        async Task AddSecurityResourcesAsync(List<ResourceRecord> rrset)
+        private async Task AddSecurityResourcesAsync(List<ResourceRecord> rrset)
         {
             // Get the signature names and types that are needed.  Then
             // add the corresponding RRSIG records to the rrset.
             var neededSignatures = rrset
-                .Where(r => r.CanonicalName != String.Empty) // ignore pseudo records as
+                .Where(r => r.CanonicalName != string.Empty) // ignore pseudo records as
                 .GroupBy(r => new { r.CanonicalName, r.Type, r.Class })
                 .Select(g => g.First());
             foreach (var need in neededSignatures)

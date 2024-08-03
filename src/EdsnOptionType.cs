@@ -1,6 +1,5 @@
 ﻿namespace Makaretu.Dns
 {
-
     /// <summary>
     ///   EDSN option codes.
     /// </summary>
@@ -108,6 +107,6 @@
         ///   Reserved for future expansion.
         /// </summary>
         /// <seealso href="https://tools.ietf.org/html/rfc6891"/>
-        FutureExpansion = 65535 
+        FutureExpansion = 65535
     }
 }

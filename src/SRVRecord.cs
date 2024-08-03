@@ -17,10 +17,10 @@
         ///  The priority of this target host.
         /// </summary>
         /// <remarks>
-        ///  A client MUST attempt to contact the target host with the 
+        ///  A client MUST attempt to contact the target host with the
         ///  lowest-numbered priority it can
         ///  reach; target hosts with the same priority SHOULD be tried in an
-        ///  order defined by the weight field.The range is 0-65535. 
+        ///  order defined by the weight field.The range is 0-65535.
         /// </remarks>
         public ushort Priority { get; set; }
 
@@ -85,6 +85,5 @@
             writer.WriteUInt16(Port);
             writer.WriteDomainName(Target, appendSpace: false);
         }
-
     }
 }

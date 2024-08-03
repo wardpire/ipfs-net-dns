@@ -33,7 +33,6 @@
         /// </value>
         public DomainName Target { get; set; }
 
-
         /// <inheritdoc />
         public override void ReadData(WireReader reader, int length)
         {
@@ -61,6 +60,5 @@
             writer.WriteUInt16(Subtype);
             writer.WriteDomainName(Target, appendSpace: false);
         }
-
     }
 }

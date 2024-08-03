@@ -44,6 +44,5 @@
         {
             return $";   Padding = {(Padding == null ? "null" : Padding.Length.ToString())}";
         }
-
     }
 }

@@ -26,7 +26,6 @@
         /// </summary>
         public DomainName DomainName { get; set; }
 
-
         /// <inheritdoc />
         public override void ReadData(WireReader reader, int length)
         {
@@ -50,6 +49,5 @@
         {
             writer.WriteDomainName(DomainName, appendSpace: false);
         }
-
     }
 }

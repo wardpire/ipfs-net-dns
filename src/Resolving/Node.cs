@@ -1,7 +1,7 @@
 ﻿namespace Makaretu.Dns.Resolving
 {
     /// <summary>
-    ///   Locally held information on a domain name. 
+    ///   Locally held information on a domain name.
     /// </summary>
     /// <remarks>
     ///   The domain name system is distributed, only a portion of the database
@@ -49,6 +49,5 @@
         ///   An Authoritative node is typically defined in a <see cref="Catalog.IncludeZone">zone</see>.
         /// </remarks>
         public bool Authoritative { get; set; }
-
     }
 }

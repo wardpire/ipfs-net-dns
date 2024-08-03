@@ -24,7 +24,7 @@ namespace Makaretu.Dns
         /// </returns>
         Task<Message> ResolveAsync(
             Message request,
-            CancellationToken cancel = default(CancellationToken)
+            CancellationToken cancel = default
             );
     }
 }

@@ -10,7 +10,6 @@
         /// </summary>
         public byte[] Data { get; set; }
 
-
         /// <inheritdoc />
         public override void ReadData(WireReader reader, int length)
         {
@@ -28,6 +27,5 @@
         {
             writer.WriteBytes(Data);
         }
-
     }
 }

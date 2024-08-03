@@ -8,7 +8,7 @@ namespace Makaretu.Dns
     /// </summary>
     /// <remarks>
     ///  <para>
-    ///  Defined in <see href="https://tools.ietf.org/html/rfc6975">RFC 6975 - 
+    ///  Defined in <see href="https://tools.ietf.org/html/rfc6975">RFC 6975 -
     ///  Signaling Cryptographic Algorithm Understanding in DNS Security Extensions(DNSSEC)</see>
     ///  </para>
     /// </remarks>
@@ -68,8 +68,7 @@ namespace Makaretu.Dns
         /// <inheritdoc />
         public override string ToString()
         {
-            return $";   DHU = {String.Join(", ", Algorithms)}";
+            return $";   DHU = {string.Join(", ", Algorithms)}";
         }
-
     }
 }

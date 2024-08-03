@@ -19,7 +19,7 @@
         }
 
         /// <summary>
-        ///  The preference given to this RR among others at the same owner. 
+        ///  The preference given to this RR among others at the same owner.
         /// </summary>
         /// <value>
         ///   Lower values are preferred.
@@ -34,7 +34,6 @@
         ///   The name of an mail exchange.
         /// </value>
         public DomainName Exchange { get; set; }
-
 
         /// <inheritdoc />
         public override void ReadData(WireReader reader, int length)
@@ -63,6 +62,5 @@
             writer.WriteUInt16(Preference);
             writer.WriteDomainName(Exchange, appendSpace: false);
         }
-
     }
 }

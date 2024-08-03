@@ -14,13 +14,15 @@ namespace Makaretu.Dns
     /// </remarks>
     public class ResourceRecord : DnsObject, IPresentationSerialiser
     {
+        private static readonly TimeSpan timeSpan = TimeSpan.FromDays(1);
+
         /// <summary>
         ///   The default time interval that a resource record maybe cached.
         /// </summary>
         /// <value>
         ///   Defaults to 1 day.
         /// </value>
-        public static TimeSpan DefaultTTL = TimeSpan.FromDays(1);
+        public static TimeSpan DefaultTTL = timeSpan;
 
         /// <summary>
         ///   The default time interval that a resource record containing
@@ -32,7 +34,7 @@ namespace Makaretu.Dns
         /// <remarks>
         ///   Host names are in A, AAAA, and HINFO records.
         /// </remarks>
-        public static TimeSpan DefaultHostTTL = TimeSpan.FromDays(1);
+        public static TimeSpan DefaultHostTTL = timeSpan;
 
         /// <summary>
         ///   An owner name, i.e., the name of the node to which this
@@ -72,7 +74,7 @@ namespace Makaretu.Dns
         /// <summary>
         ///    Specifies the time interval
         ///    that the resource record may be cached before the source
-        ///    of the information should again be consulted. 
+        ///    of the information should again be consulted.
         /// </summary>
         /// <value>
         ///    The resolution is 1 second. Defaults to 1 day.
@@ -116,7 +118,7 @@ namespace Makaretu.Dns
             {
                 var writer = new WireWriter(ms);
                 this.WriteData(writer);
-                return (int) ms.Length;
+                return (int)ms.Length;
             }
         }
 
@@ -151,7 +153,7 @@ namespace Makaretu.Dns
 
             // Find a specific class for the TYPE or default
             // to UnknownRecord.
-            var specific = ResourceRegistry.Create(Type); 
+            var specific = ResourceRegistry.Create(Type);
             specific.Name = Name;
             specific.Type = Type;
             specific.Class = Class;
@@ -220,9 +222,9 @@ namespace Makaretu.Dns
         ///   <b>true</b> if the specified object is equal to the current object; otherwise, <b>false</b>.
         /// </returns>
         /// <remarks>
-        ///   Two Resource Records are considered equal if their <see cref="Name"/>, 
+        ///   Two Resource Records are considered equal if their <see cref="Name"/>,
         ///   <see cref="Class"/>, <see cref="Type"/> and <see cref="GetData">data fields</see>
-        ///   are equal. Note that the <see cref="TTL"/> field is explicitly 
+        ///   are equal. Note that the <see cref="TTL"/> field is explicitly
         ///   excluded from the comparison.
         /// </remarks>
         public override bool Equals(object obj)
@@ -241,9 +243,9 @@ namespace Makaretu.Dns
         ///   Value equality.
         /// </summary>
         /// <remarks>
-        ///   Two Resource Records are considered equal if their <see cref="Name"/>, 
+        ///   Two Resource Records are considered equal if their <see cref="Name"/>,
         ///   <see cref="Class"/>, <see cref="Type"/> and data fields
-        ///   are equal. Note that the <see cref="TTL"/> field is explicitly 
+        ///   are equal. Note that the <see cref="TTL"/> field is explicitly
         ///   excluded from the comparison.
         /// </remarks>
         public static bool operator ==(ResourceRecord a, ResourceRecord b)
@@ -261,9 +263,9 @@ namespace Makaretu.Dns
         ///   Value inequality.
         /// </summary>
         /// <remarks>
-        ///   Two Resource Records are considered equal if their <see cref="Name"/>, 
+        ///   Two Resource Records are considered equal if their <see cref="Name"/>,
         ///   <see cref="Class"/>, <see cref="Type"/> and data fields
-        ///   are equal. Note that the <see cref="TTL"/> field is explicitly 
+        ///   are equal. Note that the <see cref="TTL"/> field is explicitly
         ///   excluded from the comparison.
         /// </remarks>
         public static bool operator !=(ResourceRecord a, ResourceRecord b)
@@ -280,19 +282,18 @@ namespace Makaretu.Dns
         /// <inheritdoc />
         public override int GetHashCode()
         {
-            return 
+            return
                 Name?.GetHashCode() ?? 0
                 ^ Class.GetHashCode()
                 ^ Type.GetHashCode()
                 ^ GetData().Aggregate(0, (r, b) => r ^ b.GetHashCode());
-
         }
 
         /// <summary>
         ///   Returns the textual representation.
         /// </summary>
         /// <returns>
-        ///   The presentation format of this resource record. 
+        ///   The presentation format of this resource record.
         /// </returns>
         public override string ToString()
         {
@@ -302,7 +303,7 @@ namespace Makaretu.Dns
 
                 // Trim trailing whitespaces (tab, space, cr, lf, ...)
                 var sb = s.GetStringBuilder();
-                while (sb.Length > 0 && Char.IsWhiteSpace(sb[sb.Length-1]))
+                while (sb.Length > 0 && char.IsWhiteSpace(sb[^1]))
                 {
                     --sb.Length;
                 }
@@ -327,7 +328,7 @@ namespace Makaretu.Dns
         }
 
         /// <summary>
-        ///   Write the textual representation of the data that is specific to 
+        ///   Write the textual representation of the data that is specific to
         ///   the resource record.
         /// </summary>
         /// <param name="writer">
@@ -370,7 +371,7 @@ namespace Makaretu.Dns
         }
 
         /// <summary>
-        ///   Read the textual representation of the data that is specific to 
+        ///   Read the textual representation of the data that is specific to
         ///   the resource record <see cref="Type"/>.
         /// </summary>
         /// <param name="reader">
@@ -382,6 +383,5 @@ namespace Makaretu.Dns
         public virtual void ReadData(PresentationReader reader)
         {
         }
-
     }
 }

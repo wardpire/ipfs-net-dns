@@ -166,5 +166,4 @@ namespace Makaretu.Dns
             writer.WriteBase64String(OtherData ?? NoData, appendSpace: false);
         }
     }
-
 }

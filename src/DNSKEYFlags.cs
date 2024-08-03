@@ -27,5 +27,4 @@ namespace Makaretu.Dns
         /// </remarks>
         ZoneKey = 0x0100,
     }
-
 }

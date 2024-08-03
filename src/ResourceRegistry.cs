@@ -86,6 +86,5 @@ namespace Makaretu.Dns
             }
             return new UnknownRecord();
         }
-
     }
 }

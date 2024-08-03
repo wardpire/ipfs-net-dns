@@ -14,7 +14,7 @@ namespace Makaretu.Dns
         /// <summary>
         ///   The least significant 4 bits of the opcode.
         /// </summary>
-        byte opcode4;
+        private byte opcode4;
 
         /// <summary>
         ///   Maximum bytes of a message.
@@ -64,7 +64,8 @@ namespace Makaretu.Dns
         /// <value>
         ///   <b>true</b> for a query; otherwise, <b>false</b> for a response.
         /// </value>
-        public bool IsQuery { get { return !QR; } }
+        public bool IsQuery
+        { get { return !QR; } }
 
         /// <summary>
         ///   Determines if the message is a response to a query.
@@ -72,11 +73,11 @@ namespace Makaretu.Dns
         /// <value>
         ///   <b>false</b> for a query; otherwise, <b>true</b> for a response.
         /// </value>
-        public bool IsResponse { get { return QR; } }
-
+        public bool IsResponse
+        { get { return QR; } }
 
         /// <summary>
-        ///   The requested operation. 
+        ///   The requested operation.
         /// </summary>
         /// <value>
         ///   One of the <see cref="MessageOperation"/> values. Both standard
@@ -129,14 +130,17 @@ namespace Makaretu.Dns
         }
 
         /// <summary>
+        /// <para>
         ///    Authoritative Answer - this bit is valid in responses,
         ///    and specifies that the responding name server is an
         ///    authority for the domain name in question section.
-        ///    
+        /// </para>
+        /// <para>
         ///    Note that the contents of the answer section may have
         ///    multiple owner names because of aliases.The AA bit
         ///    corresponds to the name which matches the query name, or
         ///    the first owner name in the answer section.
+        /// </para>
         /// </summary>
         /// <value>
         ///   <b>true</b> for an authoritative answer; otherwise, <b>false</b>.
@@ -155,11 +159,12 @@ namespace Makaretu.Dns
         public bool TC { get; set; }
 
         /// <summary>
+        /// <para>
         ///    Recursion Desired - this bit may be set in a query and
         ///    is copied into the response. If RD is set, it directs
         ///    the name server to pursue the query recursively.
-        ///    
-        ///    Recursive query support is optional.
+        /// </para>
+        /// <para>   Recursive query support is optional.</para>
         /// </summary>
         /// <value>
         ///   <b>true</b> if recursion is desired; otherwise, <b>false</b>.
@@ -177,7 +182,7 @@ namespace Makaretu.Dns
         public bool RA { get; set; }
 
         /// <summary>
-        ///    Reserved for future use. 
+        ///    Reserved for future use.
         /// </summary>
         /// <value>
         ///    Must be zero in all queries and responses.
@@ -192,8 +197,8 @@ namespace Makaretu.Dns
         /// </value>
         /// <remarks>
         ///   Only used in a response and indicates that
-        ///   all the data included in the <see cref="Answers"/> and 
-        ///   <see cref="AuthorityRecords"/> sections are authenticated by the 
+        ///   all the data included in the <see cref="Answers"/> and
+        ///   <see cref="AuthorityRecords"/> sections are authenticated by the
         ///   server according to its DNSSEC policies.
         /// </remarks>
         public bool AD { get; set; }
@@ -202,11 +207,11 @@ namespace Makaretu.Dns
         ///   Checking disabled.
         /// </summary>
         /// <value>
-        ///   <b>true</b> if the query does not require 
+        ///   <b>true</b> if the query does not require
         ///   <see cref="AD">authenticated data</see>; otherwise, <b>false</b>.
         /// </value>
         /// <remarks>
-        ///   Only used in a query and indicates that pending (non-authenticated) 
+        ///   Only used in a query and indicates that pending (non-authenticated)
         ///   data is acceptable to the resolver sending the query.
         /// </remarks>
         public bool CD { get; set; }
@@ -272,7 +277,7 @@ namespace Makaretu.Dns
         /// <value>
         ///   A list of authority resource records.
         /// </value>
-        public List<ResourceRecord> AuthorityRecords { get; set;  } = new List<ResourceRecord>();
+        public List<ResourceRecord> AuthorityRecords { get; set; } = new List<ResourceRecord>();
 
         /// <summary>
         ///   The list of additional records.
@@ -280,7 +285,7 @@ namespace Makaretu.Dns
         /// <value>
         ///   A list of additional resource records.
         /// </value>
-        public List<ResourceRecord> AdditionalRecords { get; set;  } = new List<ResourceRecord>();
+        public List<ResourceRecord> AdditionalRecords { get; set; } = new List<ResourceRecord>();
 
         /// <summary>
         ///   Create a response for the query message.
@@ -308,7 +313,7 @@ namespace Makaretu.Dns
         /// </param>
         /// <remarks>
         ///   If the message does not fit into <paramref name="length"/> bytes, then <see cref="AdditionalRecords"/>
-        ///   are removed and then <see cref="AuthorityRecords"/> are removed.  
+        ///   are removed and then <see cref="AuthorityRecords"/> are removed.
         ///   <para>
         ///   If it is still too big, then the <see cref="TC"/> bit is set.
         ///   </para>
@@ -373,12 +378,12 @@ namespace Makaretu.Dns
             var arcount = reader.ReadUInt16();
             for (var i = 0; i < qdcount; ++i)
             {
-                var question = (Question) new Question().Read(reader);
+                var question = (Question)new Question().Read(reader);
                 Questions.Add(question);
             }
             for (var i = 0; i < ancount; ++i)
             {
-                var rr = (ResourceRecord) new ResourceRecord().Read(reader);
+                var rr = (ResourceRecord)new ResourceRecord().Read(reader);
                 Answers.Add(rr);
             }
             for (var i = 0; i < nscount; ++i)
@@ -401,7 +406,7 @@ namespace Makaretu.Dns
             writer.WriteUInt16(Id);
             var flags =
                 (Convert.ToInt32(QR) << 15) |
-                (((ushort)opcode4 & 0xf)<< 11) |
+                (((ushort)opcode4 & 0xf) << 11) |
                 (Convert.ToInt32(AA) << 10) |
                 (Convert.ToInt32(TC) << 9) |
                 (Convert.ToInt32(RD) << 8) |
@@ -459,7 +464,7 @@ namespace Makaretu.Dns
             }
         }
 
-        void Stringify(StringWriter s, string title, List<ResourceRecord> records)
+        private void Stringify(StringWriter s, string title, List<ResourceRecord> records)
         {
             s.WriteLine();
             s.Write(";; ");

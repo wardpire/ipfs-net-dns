@@ -70,7 +70,7 @@ namespace Makaretu.Dns
         public DateTime SignatureInception { get; set; }
 
         /// <summary>
-        ///   The key tag of the <see cref="DNSKEYRecord"/> that 
+        ///   The key tag of the <see cref="DNSKEYRecord"/> that
         ///   validates the <see cref="Signature"/>.
         /// </summary>
         /// <value>
@@ -150,5 +150,4 @@ namespace Makaretu.Dns
             writer.WriteBase64String(Signature, appendSpace: false);
         }
     }
-
 }

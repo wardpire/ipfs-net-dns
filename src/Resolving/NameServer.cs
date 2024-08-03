@@ -35,7 +35,7 @@ namespace Makaretu.Dns.Resolving
         /// <inheritdoc />
         public async Task<Message> ResolveAsync(
             Message request,
-            CancellationToken cancel = default(CancellationToken))
+            CancellationToken cancel = default)
         {
             var response = request.CreateResponse();
 
@@ -93,9 +93,9 @@ namespace Makaretu.Dns.Resolving
         ///   If the question's domain does not exist, then the closest authority
         ///   (<see cref="SOARecord"/>) is added to the <see cref="Message.AuthorityRecords"/>.
         /// </remarks>
-        public async Task<Message> ResolveAsync(Question question, Message response = null, CancellationToken cancel = default(CancellationToken))
+        public async Task<Message> ResolveAsync(Question question, Message response = null, CancellationToken cancel = default)
         {
-            response = response ?? new Message { QR = true };
+            response ??= new Message { QR = true };
 
             // Get answer and details of the domain.
             bool found = await FindAnswerAsync(question, response, cancel);
@@ -162,9 +162,9 @@ namespace Makaretu.Dns.Resolving
 
             //  Find the resources that match the question.
             var resources = node.Resources
-                .Where(r => question.Class == DnsClass.ANY || r.Class == question.Class)
-                .Where(r => question.Type == DnsType.ANY || r.Type == question.Type)
-                .Where(r => node.Authoritative || !r.IsExpired(question.CreationTime))
+                .Where(r => (question.Class == DnsClass.ANY || r.Class == question.Class)
+                && (question.Type == DnsType.ANY || r.Type == question.Type)
+                && (node.Authoritative || !r.IsExpired(question.CreationTime)))
                 .ToArray();
             if (resources.Length > 0)
             {
@@ -187,7 +187,7 @@ namespace Makaretu.Dns.Resolving
             return Task.FromResult(false);
         }
 
-        SOARecord FindAuthority(DomainName domainName)
+        private SOARecord FindAuthority(DomainName domainName)
         {
             var name = domainName;
             while (name != null)
@@ -203,7 +203,7 @@ namespace Makaretu.Dns.Resolving
             return null;
         }
 
-        void AddAdditionalRecords(Message response)
+        private void AddAdditionalRecords(Message response)
         {
             var extras = new Message();
             var resources = response.Answers
@@ -219,14 +219,14 @@ namespace Makaretu.Dns.Resolving
                         question.Class = resource.Class;
                         question.Name = resource.Name;
                         question.Type = DnsType.AAAA;
-                        _ = FindAnswerAsync(question, extras, default(CancellationToken)).Result;
+                        _ = FindAnswerAsync(question, extras, default).Result;
                         break;
 
                     case DnsType.AAAA:
                         question.Class = resource.Class;
                         question.Name = resource.Name;
                         question.Type = DnsType.A;
-                        _ = FindAnswerAsync(question, extras, default(CancellationToken)).Result;
+                        _ = FindAnswerAsync(question, extras, default).Result;
                         break;
 
                     case DnsType.NS:
@@ -239,7 +239,7 @@ namespace Makaretu.Dns.Resolving
                         question.Class = resource.Class;
                         question.Name = ptr.DomainName;
                         question.Type = DnsType.ANY;
-                        _ = FindAnswerAsync(question, extras, default(CancellationToken)).Result;
+                        _ = FindAnswerAsync(question, extras, default).Result;
                         break;
 
                     case DnsType.SOA:
@@ -250,7 +250,7 @@ namespace Makaretu.Dns.Resolving
                         question.Class = resource.Class;
                         question.Name = resource.Name;
                         question.Type = DnsType.TXT;
-                        _ = FindAnswerAsync(question, extras, default(CancellationToken)).Result;
+                        _ = FindAnswerAsync(question, extras, default).Result;
 
                         FindAddresses(((SRVRecord)resource).Target, resource.Class, extras);
                         break;
@@ -262,8 +262,8 @@ namespace Makaretu.Dns.Resolving
 
             // Add extras with no duplication.
             extras.Answers = extras.Answers
-                .Where(a => !response.Answers.Contains(a))
-                .Where(a => !response.AdditionalRecords.Contains(a))
+                .Where(a => !response.Answers.Contains(a)
+                && !response.AdditionalRecords.Contains(a))
                 .Distinct()
                 .ToList();
             response.AdditionalRecords.AddRange(extras.Answers);
@@ -275,7 +275,7 @@ namespace Makaretu.Dns.Resolving
             }
         }
 
-        void FindAddresses(DomainName name, DnsClass klass, Message response)
+        private void FindAddresses(DomainName name, DnsClass klass, Message response)
         {
             var question = new Question
             {
@@ -283,10 +283,10 @@ namespace Makaretu.Dns.Resolving
                 Class = klass,
                 Type = DnsType.A
             };
-            var _ = FindAnswerAsync(question, response, default(CancellationToken)).Result;
+            var _ = FindAnswerAsync(question, response, default).Result;
 
             question.Type = DnsType.AAAA;
-            _ = FindAnswerAsync(question, response, default(CancellationToken)).Result;
+            _ = FindAnswerAsync(question, response, default).Result;
         }
     }
 }

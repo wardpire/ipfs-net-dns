@@ -4,7 +4,6 @@ using System;
 
 namespace Makaretu.Dns
 {
-
     [TestClass]
     public class DSRecordTest
     {
@@ -132,6 +131,5 @@ namespace Makaretu.Dns
                 var ds = new DSRecord(key);
             });
         }
-
     }
 }

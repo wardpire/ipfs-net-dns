@@ -15,7 +15,6 @@
     /// <seealso href="https://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml#dns-parameters-11">IANA - DNS EDNS0 Option Codes</seealso>.
     public abstract class EdnsOption
     {
-
         /// <summary>
         ///   The option type.
         /// </summary>
@@ -51,6 +50,5 @@
         ///   Derived classes must implement this method.
         /// </remarks>
         public abstract void WriteData(WireWriter writer);
-
     }
 }

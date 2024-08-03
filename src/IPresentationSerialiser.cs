@@ -13,12 +13,11 @@ namespace Makaretu.Dns
     ///   for more details.
     ///   <para>
     ///   The <see cref="ResourceRecord"/> adds helper methods to
-    ///   deal with a <see cref="String"/>.
+    ///   deal with a <see cref="string"/>.
     ///   </para>
     /// </remarks>
     public interface IPresentationSerialiser
     {
-
         /// <summary>
         ///   Reads the text representation of a resource record.
         /// </summary>

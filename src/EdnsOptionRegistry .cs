@@ -41,6 +41,5 @@ namespace Makaretu.Dns
             var option = new T();
             Options.Add(option.Type, () => new T());
         }
-
     }
 }
